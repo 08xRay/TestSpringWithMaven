@@ -2,6 +2,8 @@ package characters;
 
 import annotations.AddToRandom;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 @AddToRandom
@@ -16,7 +18,9 @@ public class King extends Character {
         System.out.println("Don't make me laugh!");
         final int val = ThreadLocalRandom.current().nextInt(1, super.getPower() + 1);
         System.out.println(this.getClass().getSimpleName() + " нанес " + val + " урона " + c.getClass().getSimpleName());
-        c.setHp(c.getHp() - val);
+        Map<DamageType, Integer> damage =  new HashMap<>();
+        damage.put(DamageType.HP, val);
+        c.takeDamage(this, damage);
     }
 
 }
