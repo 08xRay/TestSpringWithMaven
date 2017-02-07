@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @AddToRandom
-public class Elf extends Character {
+public class Elf extends Character implements Eared {
 
     public Elf() {
         super.setPower(10);

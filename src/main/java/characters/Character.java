@@ -51,6 +51,9 @@ public abstract class Character implements CharactersBehavior, Serializable {
         if (damage.containsKey(DamageType.PWR)) {
             setPower(getPower() - damage.get(DamageType.PWR));
         }
+        if (damage.containsKey(DamageType.PURE_HP)) {
+            setHp(getHp() - damage.get(DamageType.PURE_HP));
+        }
         damage.clear();
     }
 }

@@ -31,7 +31,8 @@ public class Reflector extends Character {
             System.out.println(this.getClass().getSimpleName() + ": fill the Power of Reflection!!!");
             int reflectedDamage = dmg.get(DamageType.HP) / 2;
             System.out.println(this.getClass().getSimpleName() + " нанес " + reflectedDamage + " урона " + from.getClass().getSimpleName());
-            dmg.put(DamageType.HP, reflectedDamage);
+            dmg.clear();
+            dmg.put(DamageType.PURE_HP, reflectedDamage);
             from.takeDamage(this, dmg);
         }
     }
