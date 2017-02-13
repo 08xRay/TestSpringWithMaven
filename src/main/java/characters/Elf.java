@@ -9,8 +9,7 @@ import java.util.Map;
 public class Elf extends Character implements Eared {
 
     public Elf() {
-        super.setPower(10);
-        super.setHp(10);
+        super(10,10);
     }
 
     public void kick(Character c) {

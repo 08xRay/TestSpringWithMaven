@@ -8,8 +8,9 @@ import java.io.ObjectOutputStream;
 public class GameManager {
 
     public static void main(String[] args) {
-        Character c1 = CharacterFactory.createCharacter();
-        Character c2 = CharacterFactory.createCharacter();
+        CharacterFactory factory = new CharacterFactory();
+        Character c1 = factory.createCharacter();
+        Character c2 = factory.createCharacter();
         fight(c1, c2);
     }
 
@@ -27,7 +28,7 @@ public class GameManager {
             logStatus(c1, c2);
 
             if (c1.getPower() == 0 && c2.getPower() == 0) {
-                System.out.println("Войны упорно сражались до самой ночи, но никто так и не смог победить... ничья!");
+                System.out.println("Воины упорно сражались до самой ночи, но никто так и не смог победить... ничья!");
                 break;
             }
         }
@@ -35,13 +36,14 @@ public class GameManager {
 
     private static void logStatus(Character c1, Character c2) {
         System.out.println("==========================================");
-        System.out.println(c1.getClass().getSimpleName() + " статус: " + c1.getHp() + " hp, " + c1.getPower() + " pwr.");
-        System.out.println(c2.getClass().getSimpleName() + " статус: " + c2.getHp() + " hp, " + c2.getPower() + " pwr.");
+        System.out.println(c1.name + " статус: " + c1.getHp() + " hp, " + c1.getPower() + " pwr.");
+        System.out.println(c2.name + " статус: " + c2.getHp() + " hp, " + c2.getPower() + " pwr.");
         System.out.println("------------------------------------------");
     }
 
     private static Character copyChatacter(Character c) {
         try {
+//            c.getClass().newInstance()
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream ous = new ObjectOutputStream(baos);
             ous.writeObject(c);

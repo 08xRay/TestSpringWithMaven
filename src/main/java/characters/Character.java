@@ -1,13 +1,34 @@
 package characters;
 
+import org.fluttercode.datafactory.impl.DataFactory;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Character implements CharactersBehavior, Serializable {
+    private static DataFactory dataFactory;
+
+    public final String name;
     private int power;
     private int hp;
     private Map<DamageType, Integer> damage;
+
+    public Character() {
+        if (Character.dataFactory == null) {
+            dataFactory = new DataFactory();
+        }
+        final int rV = ThreadLocalRandom.current().nextInt(1, 10+1);
+        for (int i = 0; i < rV; i++) dataFactory.getLastName();
+        name = new StringBuilder(this.getClass().getSimpleName()).append(" ").append(dataFactory.getLastName()).toString();
+    }
+
+    public Character(int power, int hp) {
+        this();
+        this.power = power;
+        this.hp = hp;
+    }
 
     public int getPower() {
         return power;
@@ -56,4 +77,5 @@ public abstract class Character implements CharactersBehavior, Serializable {
         }
         damage.clear();
     }
+
 }

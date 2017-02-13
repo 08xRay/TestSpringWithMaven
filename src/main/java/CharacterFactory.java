@@ -1,60 +1,44 @@
 import annotations.AddToRandom;
 import characters.Character;
+import org.reflections.Reflections;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CharacterFactory  {
 
-    private static ArrayList<Class<?>> characters = processDirectory(new File(System.getProperty("user.dir")+"/target/classes/",
-            "characters/"), "characters");
+    private Object[] characters;
 
-    public static Character createCharacter() {
-        if (characters.isEmpty())  return null;
-        int random = ThreadLocalRandom.current().nextInt(0,  characters.size());
-        Class<?> c = characters.get(random);
+    public CharacterFactory() {
+        characters = processDirectory(new File(System.getProperty("user.dir") + "/target/classes/",
+                "characters/"));
+    }
+
+
+    public Character createCharacter() {
+        if (characters == null || characters.length == 0)  return null;
+        int random = ThreadLocalRandom.current().nextInt(0,  characters.length);
         try {
+            Class<?> c = (Class<?>)characters[random];
             return (Character)c.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
            throw new RuntimeException();
         }
     }
-    private static ArrayList<Class<?>> processDirectory(File directory, String pkgname) {
 
-        ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
-
-        //System.out.println("Reading Directory '" + directory + "'");
-
-        // Get the list of the files contained in the package
-        String[] files = directory.list();
-        for (int i = 0; i < files.length; i++) {
-            String fileName = files[i];
-            String className = null;
-
-            // we are only interested in .class files
-            if (fileName.endsWith(".class")) {
-                // removes the .class extension
-                className = pkgname + '.' + fileName.substring(0, fileName.length() - 6);
-            }
-
-            //System.out.println("FileName '" + fileName + "'  =>  class '" + className + "'");
-
-            if (className != null) {
-                Class<?> cl = loadClass(className);
-                if(cl.getAnnotation(AddToRandom.class) == null) continue;
-                classes.add(loadClass(className));
+    private Object[] processDirectory(File directory) {
+        Reflections reflections = new Reflections(directory);
+        Set<Class<? extends Character>> classes = reflections.getSubTypesOf(Character.class);
+        Set<Class<? extends Character>> classesNeedToRemove = new HashSet<>();
+        for (Class<? extends Character> c : classes) {
+            if (!c.isAnnotationPresent(AddToRandom.class)) {
+                classesNeedToRemove.add(c);
             }
         }
-        return classes;
-    }
-
-    private static Class<?> loadClass(String className) {
-        try {
-            return Class.forName(className);
-        }
-        catch (ClassNotFoundException e) {
-            throw new RuntimeException("Unexpected ClassNotFoundException loading class '" + className + "'");
-        }
+        classes.removeAll(classesNeedToRemove);
+        return classes.toArray();
     }
 }

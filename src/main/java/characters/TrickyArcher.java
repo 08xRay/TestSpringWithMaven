@@ -2,6 +2,10 @@ package characters;
 
 import annotations.AddToRandom;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class TrickyArcher extends Character {
 
     public TrickyArcher() {
-        super.setPower(9);
+        super.setPower(9);;
         super.setHp(2);
     }
 
