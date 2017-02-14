@@ -1,16 +1,14 @@
 import characters.Character;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class GameManager {
 
     public static void main(String[] args) {
-        CharacterFactory factory = new CharacterFactory();
-        Character c1 = factory.createCharacter();
-        Character c2 = factory.createCharacter();
+        GameFactory factory = new GameFactory(new File(System.getProperty("user.dir") + "/target/classes/",
+                "characters/"));
+        Character c1 = factory.createRandomObject(Character.class);
+        Character c2 = factory.createRandomObject(Character.class);
         fight(c1, c2);
     }
 
@@ -43,7 +41,6 @@ public class GameManager {
 
     private static Character copyChatacter(Character c) {
         try {
-//            c.getClass().newInstance()
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream ous = new ObjectOutputStream(baos);
             ous.writeObject(c);
