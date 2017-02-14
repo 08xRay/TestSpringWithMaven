@@ -28,7 +28,7 @@ public class Golem extends Character {
     @Override
     public void kick(Character c) {
         System.out.println("I'm Golem, fear me!");
-        System.out.println(this.getClass().getSimpleName() + " нанес " + getPower() + " урона " + c.getClass().getSimpleName());
+        System.out.println(this.name + " нанес " + getPower() + " урона " + c.name);
         Map<DamageType, Integer> damage =  new HashMap<>();
         damage.put(DamageType.HP, getPower());
         c.takeDamage(this, damage);

@@ -15,13 +15,13 @@ public class Hobbit extends Character {
 
     public void kick(Character c) {
         toCry();
-        System.out.println(this.getClass().getSimpleName() + " нанес 0 урона " + c.getClass().getSimpleName());
+        System.out.println(this.name + " нанес 0 урона " + c.name);
         Map<DamageType, Integer> damage =  new HashMap<>();
         damage.put(DamageType.HP, 0);
         c.takeDamage(this, damage);
     }
 
     private void toCry() {
-        System.out.println(this.getClass().getSimpleName() + ":..mr frooudoouu weep, wee-ep");
+        System.out.println(this.name + ":..mr frooudoouu weep, wee-ep");
     }
 }

@@ -16,7 +16,7 @@ public class GameFactory {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T createRandomObject(Class<? super T> c) {
+    public <T> T createRandomObject(Class<T> c) {
         List<Class<T>> randomObjects;
         Object[] objects;
         if (!classes.containsKey(c.getSimpleName())) {

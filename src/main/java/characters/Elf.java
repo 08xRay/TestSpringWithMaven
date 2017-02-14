@@ -16,12 +16,12 @@ public class Elf extends Character implements Eared {
         Map<DamageType, Integer> damage =  new HashMap<DamageType, Integer>();
         if (c.getPower() < super.getPower()) {
             System.out.println("Ha-ha-ha, just die, fool");
-            System.out.println(this.getClass().getSimpleName() + " убил "+ c.getClass().getSimpleName());
+            System.out.println(this.name + " собрался убить "+ c.name);
             damage.put(DamageType.HP, c.getHp());
             c.takeDamage(this, damage);
         } else {
             System.out.println("i will kill you, soon..");
-            System.out.println(this.getClass().getSimpleName() + " нанес 0 урона " + c.getClass().getSimpleName());
+            System.out.println(this.name + " нанес 0 урона " + c.name);
             damage.put(DamageType.PWR, 1);
             c.takeDamage(this, damage);
         }
