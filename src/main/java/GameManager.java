@@ -4,7 +4,7 @@ import java.io.*;
 
 public class GameManager {
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         GameFactory factory = new GameFactory(new File(System.getProperty("user.dir") + "/target/classes/",
                 "characters/"));
         Character c1 = factory.createRandomObject(Character.class);
@@ -12,7 +12,7 @@ public class GameManager {
         fight(c1, c2);
     }
 
-    public static void fight(Character c1, Character c2) {
+    private static void fight(Character c1, Character c2) {
         System.out.println("Начало боя:");
         logStatus(c1, c2);
         while (c1.isAlive() && c2.isAlive()) {
@@ -37,18 +37,5 @@ public class GameManager {
         System.out.println(c1.name + " статус: " + c1.getHp() + " hp, " + c1.getPower() + " pwr.");
         System.out.println(c2.name + " статус: " + c2.getHp() + " hp, " + c2.getPower() + " pwr.");
         System.out.println("------------------------------------------");
-    }
-
-    private static Character copyChatacter(Character c) {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream ous = new ObjectOutputStream(baos);
-            ous.writeObject(c);
-            ous.close();
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            Character clone = c.getClass().cast(ois.readObject());
-            return clone;
-        } catch (Exception e) {throw new RuntimeException();}
     }
 }
