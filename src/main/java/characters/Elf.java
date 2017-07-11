@@ -13,10 +13,10 @@ public class Elf extends Character implements Eared {
     }
 
     public void kick(Character c) {
-        Map<DamageType, Integer> damage =  new HashMap<DamageType, Integer>();
+        Map<DamageType, Integer> damage = new HashMap<DamageType, Integer>();
         if (c.getPower() < super.getPower()) {
             System.out.println("Ha-ha-ha, just die, fool");
-            System.out.println(this.name + " собрался убить "+ c.name);
+            System.out.println(this.name + " собрался убить " + c.name);
             damage.put(DamageType.HP, c.getHp());
             c.takeDamage(this, damage);
         } else {

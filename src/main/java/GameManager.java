@@ -1,6 +1,6 @@
 import characters.Character;
 
-import java.io.*;
+import java.io.File;
 
 public class GameManager {
 

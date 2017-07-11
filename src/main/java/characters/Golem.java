@@ -11,8 +11,7 @@ public class Golem extends Character {
     private int counter;
 
     public Golem() {
-        super.setPower(1);
-        super.setHp(Integer.MAX_VALUE);
+        super(1, Integer.MAX_VALUE);
         counter = 7;
     }
     @Override
@@ -36,15 +35,8 @@ public class Golem extends Character {
 
     @Override
     public void takeDamage(Character from, Map<DamageType, Integer> dmg) {
-        setCounter(getCounter() - 1);
-    }
-
-    public int getCounter() {
-        return counter;
-    }
-
-    public void setCounter(int counter) {
-        this.counter = counter;
-        if (this.counter <= 0) super.setHp(0);
+        if (this.counter-- > 0)
+            return;
+        super.setHp(0);
     }
 }

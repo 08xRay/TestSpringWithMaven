@@ -1,5 +1,5 @@
 package characters;
 
 public enum DamageType {
-    HP, PWR, PURE_HP;
+    HP, PWR, PURE_HP
 }

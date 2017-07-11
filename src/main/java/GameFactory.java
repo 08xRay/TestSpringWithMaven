@@ -10,17 +10,16 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class GameFactory {
-    private final Map<String, Object[]> classes;
+    private final Map<String, Object[]> classesCash = new HashMap<>();
     private final File directory;
 
     public GameFactory(final File directory) {
         this.directory = directory;
-        this.classes = new HashMap<>();
     }
 
     @SuppressWarnings("unchecked")
     public <T> T createRandomObject(final Class<T> c) {
-        final Object[] objects = classes.computeIfAbsent(c.getSimpleName(), (ignored) -> processDirectory(directory, c));
+        final Object[] objects = classesCash.computeIfAbsent(c.getSimpleName(), (ignored) -> processDirectory(directory, c));
         final List<Class<T>> randomObjects = new ArrayList<>(objects.length);
 
         Arrays.stream(objects)

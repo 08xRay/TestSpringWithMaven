@@ -10,8 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Reflector extends Character {
 
     public Reflector() {
-        super.setPower(4);
-        super.setHp(16);
+        super(4, 16);
     }
 
     @Override

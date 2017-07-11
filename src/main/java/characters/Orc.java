@@ -10,8 +10,7 @@ import java.util.Map;
 public class Orc extends Character {
 
     public Orc() {
-        super.setPower(5);
-        super.setHp(8);
+        super(5, 8);
     }
 
     @Override

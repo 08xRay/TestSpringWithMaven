@@ -10,8 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class King extends Character {
 
     public King() {
-        super.setPower(ThreadLocalRandom.current().nextInt(5, 15 + 1));
-        super.setHp(ThreadLocalRandom.current().nextInt(5, 15 + 1));
+        super(ThreadLocalRandom.current().nextInt(5, 15 + 1), ThreadLocalRandom.current().nextInt(5, 15 + 1));
     }
 
     public void kick(Character c) {

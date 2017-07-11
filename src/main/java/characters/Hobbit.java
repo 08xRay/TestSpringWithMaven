@@ -9,8 +9,7 @@ import java.util.Map;
 public class Hobbit extends Character {
 
     public Hobbit() {
-        super.setPower(0);
-        super.setHp(3);
+        super(0, 3);
     }
 
     public void kick(Character c) {

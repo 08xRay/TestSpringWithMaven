@@ -9,22 +9,19 @@ import java.util.StringJoiner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Character implements CharactersBehavior, Serializable {
-    private static DataFactory dataFactory;
+    private static final DataFactory dataFactory = new DataFactory();
     public final String name;
+    private final Map<DamageType, Integer> damage = new HashMap<>();
     private int power;
     private int hp;
-    private Map<DamageType, Integer> damage;
 
-    public Character() {
-        if (Character.dataFactory == null) {
-            dataFactory = new DataFactory();
-        }
-        final int rV = ThreadLocalRandom.current().nextInt(1, 10+1);
+    protected Character() {
+        final int rV = ThreadLocalRandom.current().nextInt(1, 10 + 1);
         for (int i = 0; i < rV; i++) dataFactory.getLastName();
         name = new StringJoiner(" ").add(this.getClass().getSimpleName()).add(dataFactory.getLastName()).toString();
     }
 
-    public Character(int power, int hp) {
+    protected Character(int power, int hp) {
         this();
         this.power = power;
         this.hp = hp;
@@ -52,10 +49,9 @@ public abstract class Character implements CharactersBehavior, Serializable {
 
     @Override
     public void takeDamage(Character from, Map<DamageType, Integer> dmg) {
-        if (damage == null) { damage = new HashMap<>(); }
         for (DamageType key : dmg.keySet()) {
             if (damage.containsKey(key)) {
-                Integer val = damage.get(key);
+                final int val = damage.get(key);
                 damage.put(key, val + dmg.get(key));
             } else {
                 damage.put(key, dmg.get(key));
@@ -64,7 +60,7 @@ public abstract class Character implements CharactersBehavior, Serializable {
     }
 
     public void applyChanges() {
-        if (damage == null)
+        if (damage.isEmpty())
             return;
 
         if (damage.containsKey(DamageType.HP))
