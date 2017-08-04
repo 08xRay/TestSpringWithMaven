@@ -1,17 +1,18 @@
-import characters.Character;
+import model.characters.Character;
 
 import java.io.File;
 
 public class GameManager {
 
-    public static void main(String... args) {
-        GameFactory factory = new GameFactory(new File(System.getProperty("user.dir") + "/target/classes/",
-                "characters/"));
-        Character c1 = factory.createRandomObject(Character.class);
-        Character c2 = factory.createRandomObject(Character.class);
+    public static void main(String[] args) {
+        ClassInstanceFactory factory = new ClassInstanceFactory(new File(System.getProperty("user.dir") + "/target/classes/",
+                "model/characters/"));
+        Character c1 = factory.buildRandomInstance(Character.class);
+        Character c2 = factory.buildRandomInstance(Character.class);
         fight(c1, c2);
     }
 
+    // TODO: static fight method should be replaced with specialized fight simulator
     private static void fight(Character c1, Character c2) {
         System.out.println("Начало боя:");
         logStatus(c1, c2);
@@ -32,6 +33,7 @@ public class GameManager {
         }
     }
 
+    // TODO: replace with specialized logger + wrap into log formatter
     private static void logStatus(Character c1, Character c2) {
         System.out.println("==========================================");
         System.out.println(c1.name + " статус: " + c1.getHp() + " hp, " + c1.getPower() + " pwr.");

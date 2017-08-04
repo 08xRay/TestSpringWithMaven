@@ -1,11 +1,11 @@
-package characters;
+package model.characters;
 
 import annotations.AddToRandom;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
 
 @AddToRandom
+@SuppressWarnings("unused")
 public class Hobbit extends Character {
 
     public Hobbit() {
@@ -15,9 +15,7 @@ public class Hobbit extends Character {
     public void kick(Character c) {
         toCry();
         System.out.println(this.name + " нанес 0 урона " + c.name);
-        Map<DamageType, Integer> damage =  new HashMap<>();
-        damage.put(DamageType.HP, 0);
-        c.takeDamage(this, damage);
+        c.takeDamage(this, Collections.emptyList());
     }
 
     private void toCry() {

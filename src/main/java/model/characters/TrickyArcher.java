@@ -1,12 +1,14 @@
-package characters;
+package model.characters;
 
 import annotations.AddToRandom;
+import model.damage.Damage;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @AddToRandom
+@SuppressWarnings("unused")
 public class TrickyArcher extends Character {
 
     public TrickyArcher() {
@@ -16,15 +18,13 @@ public class TrickyArcher extends Character {
     @Override
     public void kick(Character c) {
         System.out.println("Right on the target!");
-        final int val = ThreadLocalRandom.current().nextInt(1, super.getPower() + 1);
+        final int val = ThreadLocalRandom.current().nextInt(1, super.getPower() * 2 + 1);
         System.out.println(this.name + " нанес " + val + " урона " + c.name);
-        Map<DamageType, Integer> damage =  new HashMap<>();
-        damage.put(DamageType.HP, val);
-        c.takeDamage(this, damage);
+        c.takeDamage(this, Collections.singletonList(new Damage(val, Damage.DamageType.HP)));
     }
 
     @Override
-    public void takeDamage(Character from, Map<DamageType, Integer> dmg) {
+    public void takeDamage(Character from, List<Damage> dmg) {
         if (ThreadLocalRandom.current().nextBoolean()) {
             System.out.println(this.name + ": few...you missed!");
         } else {

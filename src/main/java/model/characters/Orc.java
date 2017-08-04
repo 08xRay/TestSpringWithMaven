@@ -1,12 +1,13 @@
-package characters;
+package model.characters;
 
 
 import annotations.AddToRandom;
+import model.damage.Damage;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
 
 @AddToRandom
+@SuppressWarnings("unused")
 public class Orc extends Character {
 
     public Orc() {
@@ -15,17 +16,14 @@ public class Orc extends Character {
 
     @Override
     public void kick(Character c) {
-        Map<DamageType, Integer> damage =  new HashMap<DamageType, Integer>();
         if (c instanceof Eared) {
             System.out.println("Yeess, i will crush your small tiny head, eared elf");
             System.out.println(this.name + " нанес " + getPower() * 2 + " урона "+ c.name);
-            damage.put(DamageType.HP, getPower() * 2);
-            c.takeDamage(this, damage);
+            c.takeDamage(this, Collections.singletonList(new Damage(getPower() * 2, Damage.DamageType.HP)));
         } else {
             System.out.println("braAAaghhh!!");
             System.out.println(this.name + " нанес " + getPower() + " урона "+ c.name);
-            damage.put(DamageType.HP, getPower());
-            c.takeDamage(this, damage);
+            c.takeDamage(this, Collections.singletonList(new Damage(getPower(), Damage.DamageType.HP)));
         }
     }
 }

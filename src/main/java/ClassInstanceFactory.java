@@ -9,16 +9,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class GameFactory {
+public final class ClassInstanceFactory {
     private final Map<String, Object[]> classesCash = new HashMap<>();
     private final File directory;
 
-    public GameFactory(final File directory) {
+    public ClassInstanceFactory(final File directory) {
         this.directory = directory;
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T createRandomObject(final Class<T> c) {
+    //TODO: use spring DI
+    public <T> T buildRandomInstance(final Class<T> c) {
         final Object[] objects = classesCash.computeIfAbsent(c.getSimpleName(), (ignored) -> processDirectory(directory, c));
         final List<Class<T>> randomObjects = new ArrayList<>(objects.length);
 
