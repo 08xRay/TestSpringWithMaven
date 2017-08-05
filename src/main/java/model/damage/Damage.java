@@ -21,37 +21,37 @@ public final class Damage {
     }
 
     public interface Visitor {
-        void onHPDamage(Damage damage);
-        void onPWRDamage(Damage damage);
-        void onPureHPDamage(Damage damage);
+        void onHPDamage(@Nonnull Damage damage);
+        void onPWRDamage(@Nonnull Damage damage);
+        void onPureHPDamage(@Nonnull Damage damage);
     }
 
-    public void visitBy(Visitor visitor) {
+    public void visitBy(@Nonnull Visitor visitor) {
         this.type.visitBy(visitor, this);
     }
 
     public enum DamageType {
         HP {
             @Override
-            public void visitBy(Visitor visitor, Damage damage) {
+            public void visitBy(@Nonnull Visitor visitor, @Nonnull Damage damage) {
                 visitor.onHPDamage(damage);
             }
         },
 
         PWR {
             @Override
-            public void visitBy(Visitor visitor, Damage damage) {
+            public void visitBy(@Nonnull Visitor visitor, @Nonnull Damage damage) {
                 visitor.onPWRDamage(damage);
             }
         },
 
         PURE_HP {
             @Override
-            public void visitBy(Visitor visitor, Damage damage) {
+            public void visitBy(@Nonnull Visitor visitor, @Nonnull Damage damage) {
                 visitor.onPureHPDamage(damage);
             }
         };
 
-        abstract void visitBy(Visitor visitor, Damage damage);
+        abstract void visitBy(@Nonnull Visitor visitor, @Nonnull Damage damage);
     }
 }
