@@ -3,7 +3,6 @@ package model.characters;
 import model.damage.Damage;
 import org.fluttercode.datafactory.impl.DataFactory;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -65,18 +64,18 @@ public abstract class Character {
 
         Damage.Visitor visitor = new Damage.Visitor() {
             @Override
-            public void onHPDamage(@Nonnull Damage damage) {
-                setHp(getHp() - damage.getCount());
+            public void onHPDamage(int damage) {
+                setHp(getHp() - damage);
             }
 
             @Override
-            public void onPWRDamage(@Nonnull Damage damage) {
-                setPower(getPower() - damage.getCount());
+            public void onPWRDamage(int damage) {
+                setPower(getPower() - damage);
             }
 
             @Override
-            public void onPureHPDamage(@Nonnull Damage damage) {
-                setHp(getHp() - damage.getCount());
+            public void onPureHPDamage(int damage) {
+                setHp(getHp() - damage);
             }
         };
 

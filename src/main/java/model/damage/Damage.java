@@ -1,57 +1,47 @@
 package model.damage;
 
 
+import lombok.Data;
+
 import javax.annotation.Nonnull;
 
+@Data
 public final class Damage {
-    private final DamageType type;
     private final int count;
-
-    public Damage(int count, @Nonnull DamageType type) {
-        this.count = count;
-        this.type = type;
-    }
-
-    public DamageType getType() {
-        return type;
-    }
-
-    public int getCount() {
-        return count;
-    }
+    private final DamageType type;
 
     public interface Visitor {
-        void onHPDamage(@Nonnull Damage damage);
-        void onPWRDamage(@Nonnull Damage damage);
-        void onPureHPDamage(@Nonnull Damage damage);
+        void onHPDamage(int damage);
+        void onPWRDamage(int damage);
+        void onPureHPDamage(int damage);
     }
 
     public void visitBy(@Nonnull Visitor visitor) {
-        this.type.visitBy(visitor, this);
+        this.type.visitBy(visitor, count);
     }
 
     public enum DamageType {
         HP {
             @Override
-            public void visitBy(@Nonnull Visitor visitor, @Nonnull Damage damage) {
+            void visitBy(@Nonnull Visitor visitor, int damage) {
                 visitor.onHPDamage(damage);
             }
         },
 
         PWR {
             @Override
-            public void visitBy(@Nonnull Visitor visitor, @Nonnull Damage damage) {
+            void visitBy(@Nonnull Visitor visitor, int damage) {
                 visitor.onPWRDamage(damage);
             }
         },
 
         PURE_HP {
             @Override
-            public void visitBy(@Nonnull Visitor visitor, @Nonnull Damage damage) {
+            void visitBy(@Nonnull Visitor visitor, int damage) {
                 visitor.onPureHPDamage(damage);
             }
         };
 
-        abstract void visitBy(@Nonnull Visitor visitor, @Nonnull Damage damage);
+        abstract void visitBy(@Nonnull Visitor visitor, int damage);
     }
 }
