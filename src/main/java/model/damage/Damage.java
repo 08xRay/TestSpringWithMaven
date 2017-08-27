@@ -1,6 +1,5 @@
 package model.damage;
 
-
 import lombok.Data;
 
 import javax.annotation.Nonnull;
@@ -17,7 +16,7 @@ public final class Damage {
     }
 
     public void visitBy(@Nonnull Visitor visitor) {
-        this.type.visitBy(visitor, count);
+        type.visitBy(visitor, count);
     }
 
     public enum DamageType {

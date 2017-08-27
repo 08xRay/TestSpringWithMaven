@@ -1,5 +1,6 @@
 package model.characters;
 
+import lombok.Getter;
 import model.damage.Damage;
 import org.fluttercode.datafactory.impl.DataFactory;
 
@@ -12,8 +13,8 @@ public abstract class Character {
     private static final DataFactory dataFactory = new DataFactory();
     public final String name;
     private final List<Damage> damageCache;
-    private int power;
-    private int hp;
+    @Getter private int power;
+    @Getter private int hp;
 
     private Character() {
         final int rV = ThreadLocalRandom.current().nextInt(1, 10 + 1);
@@ -32,16 +33,8 @@ public abstract class Character {
     public abstract void kick(Character c);
 
     //TODO: not produce unnecessary getters/setters, keep it clean
-    public int getPower() {
-        return power;
-    }
-
     public void setPower(int power) {
         this.power = (power > 0) ? power : 0;
-    }
-
-    public int getHp() {
-        return hp;
     }
 
     public void setHp(int hp) {
