@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="reflector" class="model.characters.Reflector"></bean>
+    <!-- configuration details go here -->
+    <bean id="elf" class="model.characters.Elf"/>
+    <bean id="golem" class="model.characters.Golem"/>
+    <bean id="hobbit" class="model.characters.Hobbit"/>
+    <bean id="king" class="model.characters.King"/>
+    <bean id="knight" class="model.characters.Knight"/>
+    <bean id="orc" class="model.characters.Orc"/>
+    <bean id="reflector" class="model.characters.Reflector"/>
+    <bean id="trickyArcher" class="model.characters.TrickyArcher"/>
 </beans>
