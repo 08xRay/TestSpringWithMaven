@@ -1,8 +1,5 @@
 package model.character;
 
-import annotation.AddToRandom;
-
-@AddToRandom
 @SuppressWarnings("unused")
 public class Elf extends AbstractCharacter implements Eared {
 

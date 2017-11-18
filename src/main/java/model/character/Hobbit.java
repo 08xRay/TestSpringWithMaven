@@ -1,8 +1,5 @@
 package model.character;
 
-import annotation.AddToRandom;
-
-@AddToRandom
 @SuppressWarnings("unused")
 public class Hobbit extends AbstractCharacter {
 

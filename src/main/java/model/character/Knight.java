@@ -1,10 +1,7 @@
 package model.character;
 
-import annotation.AddToRandom;
-
 import java.util.concurrent.ThreadLocalRandom;
 
-@AddToRandom
 @SuppressWarnings("unused")
 public class Knight extends AbstractCharacter {
 

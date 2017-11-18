@@ -1,9 +1,6 @@
 package model.character;
 
 
-import annotation.AddToRandom;
-
-@AddToRandom
 @SuppressWarnings("unused")
 public class Orc extends AbstractCharacter {
 

@@ -3,18 +3,15 @@ import model.character.AbstractCharacter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.io.File;
-
 public class Launcher {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("ApplicationContext.xml");
         FightManager<AbstractCharacter> fm = (FightManager<AbstractCharacter>) ctx.getBean("baseFightManager");
-        ClassInstanceFactory factory = new ClassInstanceFactory(new File(System.getProperty("user.dir") + "/target/classes/",
-                "model/character/"));
-        AbstractCharacter c1 = factory.buildRandomInstance(AbstractCharacter.class);
-        AbstractCharacter c2 = factory.buildRandomInstance(AbstractCharacter.class);
+
+        AbstractCharacter c1 = new AbstractCharacter.Builder(ctx).buildRandomImplInstance();
+        AbstractCharacter c2 = new AbstractCharacter.Builder(ctx).buildRandomImplInstance();
         fm.fight(c1, c2);
     }
 

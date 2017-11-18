@@ -1,6 +1,7 @@
-package model.damage;
+package model.damage.impl;
 
 import lombok.Data;
+import model.damage.Damage;
 
 import javax.annotation.Nonnull;
 

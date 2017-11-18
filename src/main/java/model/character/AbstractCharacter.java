@@ -5,6 +5,7 @@ import model.stats.Onomastics;
 import model.stats.Power;
 import model.stats.Vitality;
 import org.fluttercode.datafactory.impl.DataFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.annotation.Nonnull;
 import java.util.StringJoiner;
@@ -15,6 +16,21 @@ public abstract class AbstractCharacter implements Power<Integer>, Vitality<Inte
     public final String name;
     private int power;
     private int hp;
+
+    public static class Builder {
+        private final ApplicationContext context;
+
+        public Builder(@Nonnull ApplicationContext context) {
+            this.context = context;
+        }
+
+        @Nonnull
+        public AbstractCharacter buildRandomImplInstance() {
+            String[] beanNamesForType = context.getBeanNamesForType(AbstractCharacter.class);
+            int index = ThreadLocalRandom.current().nextInt(beanNamesForType.length);
+            return (AbstractCharacter)context.getBean(beanNamesForType[index]);
+        }
+    }
 
     private AbstractCharacter() {
         final int rV = ThreadLocalRandom.current().nextInt(1, 10 + 1);
@@ -63,7 +79,7 @@ public abstract class AbstractCharacter implements Power<Integer>, Vitality<Inte
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + ": " + getName()
+        return getName()
                 + " ["
                 + "HP:" + getHP() + " "
                 + "PWR:" + getPower() + " "
