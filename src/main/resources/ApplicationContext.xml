@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:c="http://www.springframework.org/schema/c"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!-- configuration details go here -->
-    <bean id="elf" class="model.characters.Elf"/>
-    <bean id="golem" class="model.characters.Golem"/>
-    <bean id="hobbit" class="model.characters.Hobbit"/>
-    <bean id="king" class="model.characters.King"/>
-    <bean id="knight" class="model.characters.Knight"/>
-    <bean id="orc" class="model.characters.Orc"/>
-    <bean id="reflector" class="model.characters.Reflector"/>
-    <bean id="trickyArcher" class="model.characters.TrickyArcher"/>
+    <!-- contexts -->
+    <bean id="gameContext" class="context.impl.GameContext">
+        <constructor-arg ref="simpleFightStrategy"/>
+    </bean>
+
+    <!-- managers -->
+    <bean id="managerMap" class="manager.impl.ManagerMap">
+        <constructor-arg ref="gameContext"/>
+    </bean>
+
+    <bean id="baseFightManager" class="manager.impl.BaseFightManager">
+        <constructor-arg ref="gameContext"/>
+    </bean>
+
+    <!-- strategies -->
+    <bean id="simpleFightStrategy" class="strategy.impl.SimpleFightStrategy"/>
+
+    <!-- characters -->
+    <bean id="elf" class="model.character.Elf" scope="prototype"/>
+    <bean id="golem" class="model.character.Golem" scope="prototype"/>
+    <bean id="hobbit" class="model.character.Hobbit" scope="prototype"/>
+    <bean id="king" class="model.character.King" scope="prototype"/>
+    <bean id="knight" class="model.character.Knight" scope="prototype"/>
+    <bean id="orc" class="model.character.Orc" scope="prototype"/>
+    <bean id="reflector" class="model.character.Reflector" scope="prototype"/>
+    <bean id="trickyArcher" class="model.character.TrickyArcher" scope="prototype"/>
 </beans>

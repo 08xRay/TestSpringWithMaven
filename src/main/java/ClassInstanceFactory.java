@@ -1,4 +1,4 @@
-import annotations.AddToRandom;
+import annotation.AddToRandom;
 import org.reflections.Reflections;
 
 import java.io.File;

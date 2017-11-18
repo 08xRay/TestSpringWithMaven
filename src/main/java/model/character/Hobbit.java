@@ -1,21 +1,19 @@
-package model.characters;
+package model.character;
 
-import annotations.AddToRandom;
-
-import java.util.Collections;
+import annotation.AddToRandom;
 
 @AddToRandom
 @SuppressWarnings("unused")
-public class Hobbit extends Character {
+public class Hobbit extends AbstractCharacter {
 
     public Hobbit() {
         super(0, 3);
     }
 
-    public void kick(Character c) {
+    public void kick(AbstractCharacter c) {
         toCry();
         System.out.println(this.name + " нанес 0 урона " + c.name);
-        c.takeDamage(this, Collections.emptyList());
+//        c.takeDamage(this, Collections.emptyList());
     }
 
     private void toCry() {

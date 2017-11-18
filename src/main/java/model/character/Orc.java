@@ -1,29 +1,25 @@
-package model.characters;
+package model.character;
 
 
-import annotations.AddToRandom;
-import model.damage.Damage;
-
-import java.util.Collections;
+import annotation.AddToRandom;
 
 @AddToRandom
 @SuppressWarnings("unused")
-public class Orc extends Character {
+public class Orc extends AbstractCharacter {
 
     public Orc() {
         super(5, 8);
     }
 
-    @Override
-    public void kick(Character c) {
+    public void kick(AbstractCharacter c) {
         if (c instanceof Eared) {
             System.out.println("Yeess, i will crush your small tiny head, eared elf");
             System.out.println(this.name + " нанес " + getPower() * 2 + " урона "+ c.name);
-            c.takeDamage(this, Collections.singletonList(new Damage(getPower() * 2, Damage.DamageType.HP)));
+//            c.takeDamage(this, Collections.singletonList(new DamageImpl(getPower() * 2, DamageImpl.DamageType.HP)));
         } else {
             System.out.println("braAAaghhh!!");
             System.out.println(this.name + " нанес " + getPower() + " урона "+ c.name);
-            c.takeDamage(this, Collections.singletonList(new Damage(getPower(), Damage.DamageType.HP)));
+//            c.takeDamage(this, Collections.singletonList(new DamageImpl(getPower(), DamageImpl.DamageType.HP)));
         }
     }
 }
